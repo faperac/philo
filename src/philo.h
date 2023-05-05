@@ -36,6 +36,7 @@ typedef struct s_philo
 	pthread_t			thread;
 	long long			start_t;
 	int					fork;
+    int                 last_eat;
 	t_env				*env;
 }t_philo;
 
