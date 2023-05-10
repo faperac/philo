@@ -36,7 +36,7 @@ typedef struct s_philo
 	pthread_t			thread;
 	long long			start_t;
 	int					fork;
-    int                 last_eat;
+    long long			last_eat;
 	t_env				*env;
 }t_philo;
 
@@ -50,5 +50,8 @@ void    	init_fork(t_env *data);
 void    	think(t_philo *philo);
 void    	eat(t_philo *philo);
 long long	get_time_ms(void);
+void		give_fork(t_philo *philo);
+int			check_dead(t_philo *philo);
+void		dead_philo(t_philo *philo);
 
 #endif

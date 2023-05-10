@@ -12,18 +12,19 @@
 
 #include "philo.h"
 
-void	check_arg(int argc, char **argv, t_env  *data)
+void	check_arg(int argc, char **argv, t_env *data)
 {
-		if (argc == 5 || argc == 6)
-		{
-			data->philo = ft_atoi(argv[1]);
-			data->die = ft_atoi(argv[2]);
-			data->eat = ft_atoi(argv[3]);
-			data->sleep = ft_atoi(argv[4]);
-			if (argc == 6)
-				data->nb_eat = ft_atoi(argv[5]);
-		}
-		if ((data->philo > 0 || data->die > 0 || data->eat > 0 || data->sleep > 0) || data->die <= (data->eat + data->sleep))
-			return ;
+	if (argc == 5 || argc == 6)
+	{
+		data->philo = ft_atoi(argv[1]);
+		data->die = ft_atoi(argv[2]);
+		data->eat = ft_atoi(argv[3]);
+		data->sleep = ft_atoi(argv[4]);
+		if (argc == 6)
+			data->nb_eat = ft_atoi(argv[5]);
+	}
+	if ((data->philo > 0 || data->die > 0 || data->eat > 0 || data->sleep > 0)
+		|| data->die <= (data->eat + data->sleep))
+		return ;
 	exit(EXIT_FAILURE);
 }
