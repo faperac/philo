@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:41:16 by fabperei          #+#    #+#             */
-/*   Updated: 2023/04/12 15:41:48 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:16:22 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	resultat = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-			i++;
+		i++;
 	while (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i + 1] == '-' || str[i + 1] == '+')
@@ -39,4 +39,14 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (resultat * nbsigne);
+}
+
+long long	get_time_ms(void)
+{
+	struct timeval	time;
+	long long		timems;
+
+	gettimeofday(&time, NULL);
+	timems = (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return (timems);
 }
