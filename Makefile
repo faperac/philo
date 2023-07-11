@@ -6,7 +6,7 @@
 #    By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 15:41:41 by fabperei          #+#    #+#              #
-#    Updated: 2023/04/28 14:51:34 by fabperei         ###   ########.fr        #
+#    Updated: 2023/07/11 11:55:08 by fabperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 all: $(NAME)
 

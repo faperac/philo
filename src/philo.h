@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:18:44 by fabperei          #+#    #+#             */
-/*   Updated: 2023/07/10 14:16:46 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:59:30 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,26 @@
 # include <unistd.h>
 # include <sys/time.h>
 
+#define BLK "\e[0;30m"
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define YEL "\e[0;33m"
+#define BLU "\e[0;34m"
+#define MAG "\e[0;35m"
+#define CYN "\e[0;36m"
+#define WHT "\e[0;37m"
+#define RESET "\e[0m"
+
 typedef struct s_philo
 {
 	int					id;
 	pthread_t			thread;
 	long long			start_t;
-	int					fork;
 	long long			last_eat;
-	struct t_env		*env;
+	int					nb_of_eat;
+	struct s_env		*env;
+	pthread_mutex_t		fork_l;
+	pthread_mutex_t		*fork_r;
 }t_philo;
 
 typedef struct s_env
@@ -37,25 +49,23 @@ typedef struct s_env
 	int				sleep;
 	int				nb_eat;
 	long long		start_t;
-	pthread_mutex_t	*forks;
-	struct t_philo	*philos;
+	t_philo			*philos;
 }t_env;
 
-// arg
+// ft_utils
 void		check_arg(int argc, char **argv, t_env *data);
-void		check_only_number(int argc, char **argv);
+void		check_only_number(char **argv);
 int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
+long long	get_time_ms(void);
 // philo
 void		create_philo(t_env *data);
-void		*philo_routine(void *arg);
-void		take_fork(t_env *data, int fork_i);
-void		put_fork(t_env *data, int fork_i);
 void		init_fork(t_env *data);
+void		*philo_routine(void *arg);
+void		take_fork(t_philo *philo);
 void		think(t_philo *philo);
 void		eat(t_philo *philo);
-long long	get_time_ms(void);
-void		give_fork(t_philo *philo);
+void		psleep(t_philo *philo);
 int			check_dead(t_philo *philo);
 void		dead_philo(t_philo *philo);
 
