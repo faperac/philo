@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:41:16 by fabperei          #+#    #+#             */
-/*   Updated: 2023/07/10 14:16:22 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:43:31 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,16 @@ long long	get_time_ms(void)
 	gettimeofday(&time, NULL);
 	timems = (time.tv_sec * 1000 + time.tv_usec / 1000);
 	return (timems);
+}
+
+void	ft_usleep(unsigned int time, t_env *data)
+{
+	unsigned int	end_time;
+
+	if (time > 0)
+	{
+		end_time = get_time_ms() + time;
+		while ((unsigned int) get_time_ms() < end_time)
+			usleep(data->philo_nb * 2);
+	}
 }
