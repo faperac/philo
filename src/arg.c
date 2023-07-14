@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 11:30:03 by fabperei          #+#    #+#             */
-/*   Updated: 2023/07/11 13:52:11 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:08:51 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	check_arg(int argc, char **argv, t_env *data)
 			data->nb_eat = 99999999;
 	}
 	if ((data->philo_nb > 0 && data->die > 0
-			&& data->eat > 0 && data->sleep > 0)
-		&& data->die > (data->eat + data->sleep))
+			&& data->eat > 0 && data->sleep > 0))
 		return ;
 	exit(EXIT_FAILURE);
 }

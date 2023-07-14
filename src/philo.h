@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:18:44 by fabperei          #+#    #+#             */
-/*   Updated: 2023/07/12 15:43:21 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/07/14 12:02:15 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@
 # define WHT "\e[0;37m"
 # define RESET "\e[0m"
 
+# define FORK	"has taken a fork"
+# define EAT		"is eating"
+# define SLEEP	"is sleeping"
+# define THINK	"is thinking"
+# define DIED		"died"
+
 typedef struct s_philo
 {
 	int					id;
 	pthread_t			thread;
+	pthread_t			thread2;
 	long long			start_t;
 	long long			last_eat;
 	int					nb_of_eat;
@@ -48,10 +55,10 @@ typedef struct s_env
 	int				eat;
 	int				sleep;
 	int				nb_eat;
+	int				is_dead;
 	long long		start_t;
 	t_philo			*philos;
-	pthread_mutex_t		e_eat;
-	pthread_mutex_t		s_eat;
+	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t		display;
 }t_env;
 
@@ -61,6 +68,7 @@ void		check_only_number(char **argv);
 int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 long long	get_time_ms(void);
+void		ft_display(t_philo *philo, int id_philo, char *action);
 void		ft_usleep(unsigned int time, t_env *data);
 // philo
 void		create_philo(t_env *data);

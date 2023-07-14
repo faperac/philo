@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:41:16 by fabperei          #+#    #+#             */
-/*   Updated: 2023/07/12 15:43:31 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/07/13 09:06:36 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int	ft_atoi(const char *str)
 long long	get_time_ms(void)
 {
 	struct timeval	time;
-	long long		timems;
 
 	gettimeofday(&time, NULL);
-	timems = (time.tv_sec * 1000 + time.tv_usec / 1000);
-	return (timems);
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
 }
 
 void	ft_usleep(unsigned int time, t_env *data)
