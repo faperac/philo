@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:41:16 by fabperei          #+#    #+#             */
-/*   Updated: 2023/07/13 09:06:36 by fabperei         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:13:45 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,40 @@ long long	get_time_ms(void)
 	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
 }
 
-void	ft_usleep(unsigned int time, t_env *data)
+void	ft_usleep(unsigned int ms)
 {
-	unsigned int	end_time;
+	long int	time;
 
-	if (time > 0)
+	time = get_time_ms();
+	while (get_time_ms() - time < ms)
+		usleep(ms / 10);
+}
+
+void	ft_display(t_philo *philo, int id_philo, char *action)
+{
+	long long	time;
+
+	pthread_mutex_lock(&(philo->env->display));
+	time = get_time_ms() - philo->env->start_time;
+	if (!philo->env->one_dead && time >= 0 && !check_dead(philo, 0))
+		printf("%s%lld%s Philo %d %s\n", YEL, get_time_ms() \
+		- philo->env->start_time, RESET, id_philo, action);
+	pthread_mutex_unlock(&(philo->env->display));
+}
+
+void	ft_free(t_env *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->philo_nb)
 	{
-		end_time = get_time_ms() + time;
-		while ((unsigned int) get_time_ms() < end_time)
-			usleep(data->philo_nb * 2);
+		pthread_mutex_destroy(&data->philos[i].fork_l);
+		pthread_mutex_destroy(data->philos[i].fork_r);
 	}
+	free(data->philos);
+	pthread_mutex_destroy(&(data->display));
+	pthread_mutex_destroy(&(data->dead_mutex));
+	pthread_mutex_destroy(&(data->eat_mutex));
+	pthread_mutex_destroy(&(data->stop));
 }

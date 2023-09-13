@@ -6,19 +6,19 @@
 #    By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 15:41:41 by fabperei          #+#    #+#              #
-#    Updated: 2023/07/13 10:31:46 by fabperei         ###   ########.fr        #
+#    Updated: 2023/09/12 12:33:07 by fabperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = $(wildcard src/*.c)
+SRCS = src/arg.c src/philo.c src/utiles_philo1.c src/check.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 all: $(NAME)
 
